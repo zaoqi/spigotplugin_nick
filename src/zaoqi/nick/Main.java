@@ -67,7 +67,7 @@ public final class Main extends JavaPlugin implements TabCompleter {
         if (cmd.getName().equals("nick")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage("This command can only be run by a player.");
-            } else if (removeInventoryItem(((Player) sender).getInventory(), Material.BED)) {//sender.hasPermission("yanp.nick")
+            } else if (removeInventoryItem(((Player) sender).getInventory(), Material.PAINTING)) {//sender.hasPermission("yanp.nick")
                 Player player = (Player) sender;
                 if (args.length == 0) {
                     removeNick(player);
@@ -152,11 +152,7 @@ public final class Main extends JavaPlugin implements TabCompleter {
     public boolean changeNick(Player p, String nick) {
         String nickcolor = ChatColor.translateAlternateColorCodes('&', nick) + ChatColor.RESET;
         String nickuncolor = ChatColor.stripColor(nickcolor);
-        if (nickuncolor.length() < 3) {
-            p.sendMessage("The nickname is too short <3");
-        } else if (nickuncolor.length() > 20) {
-            p.sendMessage("The nickname is too long >20");
-        } else if (nick2Player.containsKey(nickuncolor) && !nick2Player.get(nickuncolor).getName().equals(p.getName())) {
+        if (nick2Player.containsKey(nickuncolor) && !nick2Player.get(nickuncolor).getName().equals(p.getName())) {
             p.sendMessage("This nickname is used by " + nick2Player.get(nickuncolor).getName());
         } else {
             String prevnick = ChatColor.stripColor(p.getDisplayName());
@@ -219,11 +215,7 @@ public final class Main extends JavaPlugin implements TabCompleter {
         for (ItemStack is : inv.getContents()) {
             if (is != null && is.getType() == type) {
                 int newamount = is.getAmount() - 1;
-                if (0 == newamount) {
-                    inv.remove(is);
-                    return true;
-                }
-                if (newamount > 0) {
+                if (newamount >= 0) {
                     is.setAmount(newamount);
                     return true;
                 }
