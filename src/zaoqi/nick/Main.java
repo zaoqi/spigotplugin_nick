@@ -85,6 +85,8 @@ public final class Main extends JavaPlugin implements TabCompleter {
                     String nick = builder.toString();
                     changeNick(player, nick);
                 }
+            } else {
+                sender.sendMessage("You don't have it.");
             }
             return true;
         }
