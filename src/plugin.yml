@@ -1,0 +1,8 @@
+name: znick
+main: zaoqi.nick.Main
+version: 0.1.0
+
+commands:
+    nick:
+        usage: /nick 新名字
+        description: 改名
